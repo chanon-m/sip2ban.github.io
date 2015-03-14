@@ -25,7 +25,7 @@ while (my $row = <$fh>) {
 }
 close $fh;
 
-#count failed if >= faled times, it will be blacklist
+#if failed times >= count, it will be blacklist
 my %seen;
 foreach my $item (@ip) {
   $seen{$item}++;
