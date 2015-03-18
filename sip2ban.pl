@@ -66,7 +66,7 @@ foreach my $line (@lines) {
           #update an iptables rule in iptables configuration file
           print $fh "-A RH-Firewall-1-INPUT -s $blockedip[$j] -j DROP\n";
           #apply an iptables rule
-          my $returncode = system("/sbin/iptables -A RH-Firewall-1-INPUT -s $blockedip[$j] -j DROP");
+          my $returncode = system("/sbin/iptables -I RH-Firewall-1-INPUT 2 -s $blockedip[$j] -j DROP");
           if($returncode != 0) {
               print "Could not add $heckip[$j] in iptables rule!\n";
           } else {
