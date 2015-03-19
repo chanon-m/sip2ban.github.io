@@ -16,14 +16,28 @@ Reported bugs or requested new feature can be sent to chanonm@live.com
 
 1. Upload sip2ban.pl to your Asterisk in /etc
 
-2. chmod 755 /etc/sip2ban.pl
+```
+
+# cp ./sip2ban.pl /etc
+
+```
+
+2. Make a file executable
+
+```
+
+# chmod 755 /etc/sip2ban.pl
+
+```
 
 3. Create a crontab job on your server
 
 If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 
----
+```
+
+# crontab -e 
 
 */5 * * * *      /etc/sip2ban.pl >> /var/log/sip2ban.log&
 
----
+```
