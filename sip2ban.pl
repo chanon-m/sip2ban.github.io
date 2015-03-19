@@ -39,7 +39,7 @@ foreach my $item (keys %seen) {
    }
 }
 
-if($blockedip[0] ne "") {
+if($countip > 0) {
    #read iptables configuration file
    open($fh, '<',"/etc/sysconfig/iptables") or die "Could not open file!";
    my @lines=<$fh>;
