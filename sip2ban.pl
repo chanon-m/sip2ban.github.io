@@ -4,6 +4,7 @@ use File::Copy;
 
 if($#ARGV != 0) {
   print "usage: sip2ban.pl faliedtimes\n";
+  print "ex: sip2ban.pl 5\n";
   exit;
 }
 
