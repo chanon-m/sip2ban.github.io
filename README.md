@@ -85,15 +85,21 @@ In your opensips.cfg, you have to add:
 
 if (is_method("REGISTER"))
 	{
-      $var(auth_code) = www_authorize("", "subscriber");
-      if ( $var(auth_code) == -1 || $var(auth_code) == -2 ) {
-          xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause $var(auth_code)");
-      }
-      if ( $var(auth_code) < 0 ) {
-          www_challenge("", "0");
-          exit;
-      }
-  }
+      		$var(auth_code) = www_authorize("", "subscriber");
+      		if ($var(auth_code) == -1 || $var(auth_code) == -2) {
+          		xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause $var(auth_code)");
+      		}
+      
+      		if ($var(auth_code) < 0) {
+          		www_challenge("", "0");
+          		exit;
+      		}
+      
+      		if (!save("location"))
+	  		sl_reply_error();
+
+		exit;
+  	}
 
 ```
 
