@@ -20,8 +20,8 @@ open(my $fh, '<', $logfile) or die "Could not open file '$logfile' $!";
 while (my $row = <$fh>) {
   chomp $row;
   if(index($row, $key) != -1) {
-      my @data = split /[',:, ]/, $row;
-      $ip[$i++] = $data[20];
+      my @data = split / /, $row;
+      $ip[$i++] = $data[10];
   }
 }
 close $fh;
