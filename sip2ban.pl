@@ -78,7 +78,6 @@ if($countip > 0) {
 
       #save new iptables rules
       open($fh, '>',"/etc/sysconfig/iptables") or die "Could not open file!";
-
       foreach my $line (@lines) {
           my $search = "-A RH-Firewall-1-INPUT -i lo -j ACCEPT";
           print $fh $line;
