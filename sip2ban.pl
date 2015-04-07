@@ -13,8 +13,8 @@ my $logfile = '/var/log/asterisk/full';
 my $datetime = localtime;
 my $count = $ARGV[0];
 my $key = 'failed for';
-my $i = 0;
 my @ip;
+my $i = 0;
 
 #read asterisk log file
 open(my $fh, '<', $logfile) or die "Could not open file '$logfile' $!";
@@ -45,42 +45,46 @@ if($countip > 0) {
    #read iptables configuration file
    open($fh, '<',"/etc/sysconfig/iptables") or die "Could not open file!";
    my @lines=<$fh>;
-   my $linenum = scalar(@lines) - 2;
    close $fh;
 
-   #backup iptables configuration file
-   move("/etc/sysconfig/iptables","/etc/sysconfig/iptables.old");
-
-   #save and apply new iptables rules
-   open($fh, '>',"/etc/sysconfig/iptables") or die "Could not open file!";
-   $i = 0;
    foreach my $line (@lines) {
       for(my $j=0; $j < $countip; $j++) {
-         my $str = "-A RH-Firewall-1-INPUT -s $blockedip[$j] -j DROP\n";
-         if($line eq $str) {
+         my $str = "-A RH-Firewall-1-INPUT -s $blockedip[$j] -j DROP";
+         if($line =~ /$str/) {
            $blockedip[$j]="";
+           $countip--;
          }
+      }
+   }
+
+   if($countip > 0) {
+      #backup iptables configuration file
+      move("/etc/sysconfig/iptables","/etc/sysconfig/iptables.old");
+
+      #apply new iptables rules
+      my $newiptables;
+      foreach my $ip (@blockedip) {
+          if($ip ne "") {
+             $newiptables .= "-A RH-Firewall-1-INPUT -s $ip -j DROP\n";
+             my $returncode = system("/sbin/iptables -I RH-Firewall-1-INPUT 2 -s $ip -j DROP");
+             if($returncode != 0) {
+                 print "$datetime Could not add $ip in iptables rule!\n";
+             } else {
+                print "$datetime Bloacked IP Address : $ip\n";
+             }
+
+          }
       }
 
-      my $search = "-A RH-Firewall-1-INPUT -i lo -j ACCEPT";
-      if($line =~ /$search/) {
-         for(my $j=0; $j < $countip; $j++) {
-           print $fh $line;
-           if($blockedip[$j] ne "") {
-             #update an iptables rule in iptables configuration file
-             print $fh "-A RH-Firewall-1-INPUT -s $blockedip[$j] -j DROP\n";
-             #apply an iptables rule
-             my $returncode = system("/sbin/iptables -I RH-Firewall-1-INPUT 2 -s $blockedip[$j] -j DROP");
-             if($returncode != 0) {
-                 print "$datetime Could not add $blockedip[$j] in iptables rule!\n";
-             } else {
-                print "$datetime Bloacked IP Address : $blockedip[$j]\n";          
-             }
-           }
-         }
-      } else {
-         print $fh $line;
+      #save new iptables rules
+      open($fh, '>',"/etc/sysconfig/iptables") or die "Could not open file!";
+
+      foreach my $line (@lines) {
+          my $search = "-A RH-Firewall-1-INPUT -i lo -j ACCEPT";
+          print $fh $line;
+          if($line =~ /$search/) {
+               print $fh $newiptables;
+          }
       }
-      $i++;
    }
 }
