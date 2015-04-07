@@ -12,13 +12,20 @@ Chanon Mingsuwan
 
 Reported bugs or requested new feature can be sent to chanonm@live.com
 
-#How to run file
-
-* Upload sip2ban.pl to your Asterisk in /etc
+#How to run a file
+* Download files in your server
 
 ```
 
-# cp ./sip2ban.pl /etc
+# git clone https://github.com/chanon-m/sip2ban.github.io.git
+
+```
+
+* Copy sip2ban.pl to /etc
+
+```
+
+# cp ./sip2ban.github.io/sip2ban.pl /etc
 
 ```
 
