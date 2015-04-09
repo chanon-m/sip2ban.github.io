@@ -41,6 +41,21 @@ foreach my $item (keys %seen) {
 }
 
 if($countip > 0) {
+  #read and apply whitelist
+  if(open(my $fh, '<',"/etc/failed2ban3000/whitelist.ini")) {
+      my @whitelistlines=<$fh>;
+      close $fh;
+      foreach my $whitelist (@whitelistlines) {
+          chomp $whitelist;
+          for(my $j=0; $j < $count; $j++) {
+               if($whitelist =~ /$blockedip[$j]/) {
+                   $blockedip[$j] = "";
+               }
+          }
+
+      }
+  }
+  
    #read iptables configuration file
    open($fh, '<',"/etc/sysconfig/iptables") or die "Could not open file!";
    my @lines=<$fh>;
