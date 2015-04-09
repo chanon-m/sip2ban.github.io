@@ -37,6 +37,23 @@ Reported bugs or requested new feature can be sent to chanonm@live.com
 
 ```
 
+* Copy whitelist file to /etc
+
+```
+
+# cp -r ./sip2ban.github.io/etc/sip2ban /etc
+
+```
+
+* Format for the whitelist
+
+####_whitelist.ini_
+```
+ip1
+ip2
+
+```
+
 * Create a crontab job on your server
 
 If you want sip2ban.pl to run every 5 minutes, you should code the time as:
