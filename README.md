@@ -1,5 +1,5 @@
-# SIP2Ban for Asterisk
-Avoided SIP attackers in Asterisk and OpenSIPS
+# SIP2Ban for Asterisk and OpenSIPS
+Avoided SIP and RTP attackers in Asterisk and OpenSIPS
 
 #Licensing Information: READ LICENSE
 
