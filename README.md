@@ -1,6 +1,8 @@
 # SIP2Ban for Asterisk and OpenSIPS
 Avoided SIP and RTP attackers in Asterisk and OpenSIPS
 
+![Alt text](http://www.icalleasy.com/images/basic_voip_system.png "Basic VOIP System") 
+
 #Licensing Information: READ LICENSE
 
 #Project source can be downloaded from
