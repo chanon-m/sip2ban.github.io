@@ -158,7 +158,7 @@ If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 
 ##TIP - Set QOS in CentOS
 
-* Edit and Add the rules in iptables
+* Edit and Add the rules in iptables (Please make sure your switchhub doesn't remove dscp value)
 
 ```
 
