@@ -21,6 +21,8 @@ Reported bugs or requested new feature can be sent to chanonm@live.com
 
 ```
 
+##Asterisk
+
 * Copy sip2ban.pl to /etc
 
 ```
@@ -65,6 +67,8 @@ If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 */5 * * * *      /etc/sip2ban.pl >> /var/log/sip2ban.log&
 
 ```
+
+## OpenSIPS
 
 * Copy sip2ban_opensips.pl to /etc
 
@@ -129,5 +133,25 @@ If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 # crontab -e 
 
 */5 * * * *      /etc/sip2ban_opensips.pl >> /var/log/sip2ban_opensips.log&
+
+```
+
+##RTP HOTPOT
+
+* Copy rtp.sh and rtphotpot.pl to /etc
+
+```
+
+# cp ./sip2ban.github.io/rtp.sh /etc
+# cp ./sip2ban.github.io/rtphotpot.pl /etc
+
+```
+
+* Make a file executable
+
+```
+
+# chmod 755 /etc/rtp.sh
+# chmod 755 /etc/rtphotpot.pl
 
 ```
