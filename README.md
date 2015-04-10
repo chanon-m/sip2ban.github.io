@@ -168,7 +168,7 @@ if ( !(is_method("REGISTER")  ) ) {
 		} else {
 			# if caller is not local, then called number must be local
 			if (!uri==myself) {
-			        xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause Rely forbidden");
+				xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause Rely forbidden");
 				send_reply("403","Rely forbidden");
 				exit;
 			}
