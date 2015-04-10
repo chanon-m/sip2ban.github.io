@@ -124,35 +124,68 @@ if (is_method("REGISTER"))
 
 ```
 
+##RTP without registration attacks in OpenSIPS
+
+```
+
+* Add codes in opensips.cfg
+
+Original opensips.cfg
+```
+if ( !(is_method("REGISTER")  ) ) {
+		if (from_uri==myself)
+		{
+		} else {
+			# if caller is not local, then called number must be local
+			if (!uri==myself) {
+				send_reply("403","Rely forbidden");
+				exit;
+			}
+		}
+}
+
+```
+
+In your opensips.cfg, you have to add:
+```
+
+if ( !(is_method("REGISTER")  ) ) {
+		if (from_uri==myself)
+		{
+   		     if(!proxy_authorize("", "subscriber")) {
+                        xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause Proxy authentication required");
+                        proxy_challenge("", "0");
+                        exit;
+                     }
+                     if (!db_check_from()) {
+                        xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause Forbidden auth ID");
+                        sl_send_reply("403", "Forbidden auth ID");
+                        exit;
+                     }
+
+                     consume_credentials();
+
+		} else {
+			# if caller is not local, then called number must be local
+			if (!uri==myself) {
+			        xlog("L_NOTICE","Auth_error for $fU@$fd from $si cause Rely forbidden");
+				send_reply("403","Rely forbidden");
+				exit;
+			}
+		}
+}
+
+```
+
 * Create a crontab job on your server
 
-If you want sip2ban.pl to run every 5 minutes, you should code the time as:
+If you want sip2ban_opensips.pl to run every 5 minutes, you should code the time as:
 
 ```
 
 # crontab -e 
 
 */5 * * * *      /etc/sip2ban_opensips.pl >> /var/log/sip2ban_opensips.log&
-
-```
-
-##RTP HOTPOT
-
-* Copy rtp.sh and rtphotpot.pl to /etc
-
-```
-
-# cp ./sip2ban.github.io/rtp.sh /etc
-# cp ./sip2ban.github.io/rtphotpot.pl /etc
-
-```
-
-* Make a file executable
-
-```
-
-# chmod 755 /etc/rtp.sh
-# chmod 755 /etc/rtphotpot.pl
 
 ```
 
