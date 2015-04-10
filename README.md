@@ -155,3 +155,19 @@ If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 # chmod 755 /etc/rtphotpot.pl
 
 ```
+
+##TIP - Set QOS in CentOS
+
+* Edit and Add the rules in iptables
+
+```
+
+#Setting DSCP
+# tos_sip=cs3, tos_audio=ef, tos_video=af41
+*mangle
+-A OUTPUT -p udp -m udp --sport 5060 -j DSCP --set-dscp-class cs3
+-A OUTPUT -p udp -m udp --dport 5060 -j DSCP --set-dscp-class cs3
+-A OUTPUT -p udp -m udp --sport 10000:62767 -j DSCP --set-dscp-class ef
+COMMIT
+
+```
