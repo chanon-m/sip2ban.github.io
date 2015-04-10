@@ -86,6 +86,8 @@ If you want sip2ban.pl to run every 5 minutes, you should code the time as:
 
 ```
 
+###Unauthorized attacks
+
 * Add codes in opensips.cfg
 
 Original opensips.cfg
@@ -124,9 +126,7 @@ if (is_method("REGISTER"))
 
 ```
 
-##RTP without registration attacks in OpenSIPS
-
-```
+###RTP without registration attacks
 
 * Add codes in opensips.cfg
 
