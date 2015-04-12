@@ -9,7 +9,7 @@ fi
 
 for i in $(seq $1 $2)
 do
-   /etc/rtphotpot.pl $i &
+   /etc/honeypot.pl $i &
 done
 
 else
