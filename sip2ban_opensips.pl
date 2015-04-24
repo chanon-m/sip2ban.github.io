@@ -42,7 +42,7 @@ foreach my $item (keys %seen) {
 
 if($countip > 0) {
   #read and apply whitelist
-  if(open(my $fh, '<',"/etc/failed2ban3000/whitelist.ini")) {
+  if(open(my $fh, '<',"/etc/sip2ban/whitelist.ini")) {
       my @whitelistlines=<$fh>;
       close $fh;
       foreach my $whitelist (@whitelistlines) {
