@@ -191,6 +191,54 @@ If you want sip2ban_opensips.pl to run every 5 minutes, you should code the time
 
 ```
 
+##FreeSwitch (Unauthorized and RTP attacks)
+
+* Copy sip2ban_freeswitch.pl to /etc
+
+```
+
+# cp ./sip2ban.github.io/sip2ban_freeswitch.pl /etc
+
+```
+
+* Make a file executable
+
+```
+
+# chmod 755 /etc/sip2ban_freeswitch.pl
+
+```
+
+* Copy whitelist file to /etc
+
+```
+
+# cp -r ./sip2ban.github.io/etc/sip2ban /etc
+
+```
+
+* Format for the whitelist
+
+####_whitelist.ini_
+```
+ip1
+ip2
+
+```
+
+* Create a crontab job on your server
+
+If you want sip2ban_freeswitch.pl to run every 5 minutes, you should code the time as:
+
+```
+
+# crontab -e 
+
+*/5 * * * *      /etc/sip2ban_freeswitch.pl >> /var/log/sip2ban_freeswitch.log&
+
+```
+
+
 ##TIP - Set QOS in CentOS
 
 * Add new rules in iptables (Please make sure your switchhub doesn't remove dscp value)
