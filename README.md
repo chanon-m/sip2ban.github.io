@@ -1,5 +1,5 @@
 # SIP2Ban for Asterisk and OpenSIPS
-Avoided SIP and RTP attackers in Asterisk and OpenSIPS
+Avoided SIP and RTP attackers in Asterisk, FreeSwitch and OpenSIPS
 
 ![Alt text](http://www.icalleasy.com/images/basic_voip_system.png "Basic VOIP System") 
 
