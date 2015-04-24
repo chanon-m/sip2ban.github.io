@@ -4,8 +4,8 @@ use strict;
 use IO::Socket::INET;
 
 if($#ARGV != 0) {
-  print "usage: rtphotpot.pl port\n";
-  print "ex: rtphotpot.pl 22222\n";
+  print "usage: honeypot.pl port\n";
+  print "ex: honeypot.pl 22222\n";
   exit;
 }
 
